@@ -1,5 +1,5 @@
-import 'package:community/components/launch/homeComponent.dart';
-import 'package:community/components/launch/splashComponent.dart';
+import 'package:community/view/launch/homeComponent.dart';
+import 'package:community/view/launch/splashComponent.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
