@@ -1,3 +1,4 @@
+import 'package:community/redux/actions/action.dart';
 import 'package:community/view//appComponent.dart';
 import 'package:community/redux/app_state.dart';
 import 'package:community/redux/reducers/app_reducer.dart';
@@ -32,5 +33,5 @@ void main() async {
 
 String customReduxLogFormatter<AppState>(
     AppState state, dynamic action, DateTime timestamp) {
-  return "{Action: $action, Description: ${action.toString()}, State: $state, Timestamp: ${new DateTime.now()}}";
+  return "{Action: $action, Description: ${action.getDescription()}, State: $state, Timestamp: ${new DateTime.now()}}";
 }
