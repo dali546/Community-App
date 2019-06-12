@@ -20,13 +20,32 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Core
+  #
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  ## Theme Management
   dynamic_theme: ^1.0.0
+  ## Route/Navigation Management
   fluro: ^1.4.0
-  splashscreen: ^1.2.0
+  ## Generate Launcher Icons
   flutter_launcher_icons: ^0.6.1
+  ## Splash Screen Dependencu
+  splashscreen: ^1.2.0
+
+
+  # State Management
+  # State Management will be managed using two systems: BLoC and Redux
+  # Local State (mainly UI and small local changes to views etc) should be managed with the BLoC pattern
+  # Global State (API network Requests, Global App Preference Store,
+  # or things affecting the entire app) should be managed with Redux
+  ## BLoC - Local State
+  ## Redux - Global State
+  flutter_redux: ^0.5.3
+  redux_logging: ^0.3.0
+  built_value: ^6.6.0
+
 
   #global_configuration: ^0.1.4
 
@@ -45,6 +64,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
   assets:
   - assets/images/logo.png
   - assets/images/screen.png
@@ -79,6 +99,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+
+## Temporary Fix for Flutter Icons crashing on generating images
+dependency_overrides:
+  image: 2.0.7
 
 flutter_icons:
   android: "launcher_icon"
