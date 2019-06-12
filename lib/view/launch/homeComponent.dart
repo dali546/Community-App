@@ -1,9 +1,12 @@
 import 'package:community/redux/actions/ui_actions.dart';
 import 'package:community/redux/app_state.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
+
+import 'components/customNavBar.dart';
 
 class HomeComponent extends StatefulWidget {
   @override
@@ -32,13 +35,12 @@ class _HomeComponentState extends State<HomeComponent> {
                 child: new Text("Welcome. Test App."),
               ),
             ),
-            Center(
-              child: new TextField(controller: appNameTextController)
-            ),
+            Center(child: new TextField(controller: appNameTextController)),
             Center(
               child: new FlatButton(
                   onPressed: () {
-                    store.dispatch(ChangeApplicationNameAction(appNameTextController.text));
+                    store.dispatch(ChangeApplicationNameAction(
+                        appNameTextController.text));
                   },
                   child: new Text("Change App name")),
             ),
@@ -53,6 +55,7 @@ class _HomeComponentState extends State<HomeComponent> {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomAppBar(),
     );
   }
 }
