@@ -1,35 +1,29 @@
 // The Redux Store
 
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 class AppState {
   final String appName;
-  final ThemeData themeData;
 
-  AppState({@required this.appName, @required this.themeData});
+  AppState({@required this.appName});
 
   factory AppState.initial() {
     return AppState(
-        appName: "Community - Initial State",
-        themeData: ThemeData.dark()
+      appName: "Community - Initial State",
     );
   }
 
-  AppState copyWith({
-    String appName, ThemeData themeData
-  }) {
+  AppState copyWith({String appName}) {
     return AppState(
       appName: appName ?? this.appName,
-      themeData: themeData ?? this.themeData,
     );
   }
 
-  @override
-  int get hashCode => hashCode;
+  // Convert JSON to AppState
+  static AppState fromJson(dynamic json) {
+    if (json != null) return AppState(appName: json["appName"] as String);
+  }
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is AppState && appName == other.appName;
+  dynamic toJson() => {'appName': appName};
 }
