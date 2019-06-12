@@ -40,11 +40,12 @@ dependencies:
   # Local State (mainly UI and small local changes to views etc) should be managed with the BLoC pattern
   # Global State (API network Requests, Global App Preference Store,
   # or things affecting the entire app) should be managed with Redux
-  ## BLoC - Local State
   ## Redux - Global State
   flutter_redux: ^0.5.3
   redux_logging: ^0.3.0
-  built_value: ^6.6.0
+  redux_persist_flutter: ^0.8.1
+  ## BLoC - Local State
+
 
 
   #global_configuration: ^0.1.4
