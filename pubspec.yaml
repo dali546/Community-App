@@ -46,6 +46,12 @@ dependencies:
   redux_persist_flutter: ^0.8.1
   ## BLoC - Local State
 
+  # Custom Nav Bar
+  curved_navigation_bar: ^0.2.0
+
+  # Refresher
+  pull_to_refresh: ^1.4.4
+
 
 
   #global_configuration: ^0.1.4
