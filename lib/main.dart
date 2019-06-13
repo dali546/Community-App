@@ -32,5 +32,5 @@ void main() async {
 
 String customReduxLogFormatter<AppState>(
     AppState state, dynamic action, DateTime timestamp) {
-  return "{Action: $action, Description: ${action.toString()}, State: $state, Timestamp: ${new DateTime.now()}}";
+  return "{Action: $action, Description: ${action.getDescription()}, State: $state, Timestamp: ${new DateTime.now()}}";
 }
