@@ -1,5 +1,5 @@
 import 'package:logging/logging.dart';
-import 'package:redux/src/store.dart';
+import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
 final Logger logger = new Logger("Redux-Log");
