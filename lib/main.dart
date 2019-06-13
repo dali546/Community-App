@@ -1,4 +1,4 @@
-import 'package:community/components/appComponent.dart';
+import 'package:community/view//appComponent.dart';
 import 'package:community/redux/app_state.dart';
 import 'package:community/redux/reducers/app_reducer.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ void main() async {
   // Create Store - Holds global configuration of the app.
   final store = Store<AppState>(
     appReducer,
-    initialState: initialState ?? AppState.initial(),
+    initialState: initialState,
     middleware: [
       persistor.createMiddleware(), // calls toJson to save config -- i think
       new LoggingMiddleware.printer(formatter: customReduxLogFormatter)

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'homeComponent.dart';
+import 'package:community/view/main/homeComponentView.dart';
 
 class SplashComponent extends StatefulWidget {
   @override
@@ -12,7 +12,7 @@ class _SplashComponentState extends State<SplashComponent> {
   Widget build(BuildContext context) {
     return new SplashScreen(
         seconds: 10,
-        navigateAfterSeconds: new HomeComponent(),
+        navigateAfterSeconds: new HomeComponentView(),
         title: new Text(
           'Welcome In SplashScreen',
           style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
