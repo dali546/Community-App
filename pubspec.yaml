@@ -34,6 +34,10 @@ dependencies:
   ## Splash Screen Dependencu
   splashscreen: ^1.2.0
 
+  ## Equatable - Handles equality of objects
+  equatable: ^0.2.0
+
+
 
   # State Management
   # State Management will be managed using two systems: BLoC and Redux
@@ -45,6 +49,7 @@ dependencies:
   redux_logging: ^0.3.0
   redux_persist_flutter: ^0.8.1
   ## BLoC - Local State
+  flutter_bloc: ^0.17.0
 
   # Custom Nav Bar
   curved_navigation_bar: ^0.2.0

@@ -1,3 +1,3 @@
 import 'package:fluro/fluro.dart';
 
-final router = Router();
+final Router router = Router();
