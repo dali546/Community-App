@@ -11,9 +11,10 @@ class AppState {
 
   factory AppState.initial() {
     return AppState(
-      appName: "Community",
-      currentRouteTitle: "No Route Specified" // Todo move over to BLoC pattern
-    );
+        appName: "Community",
+        currentRouteTitle:
+            "No Route Specified" // Todo move over to BLoC pattern
+        );
   }
 
   AppState copyWith({String appName, String currentRouteTitle}) {
