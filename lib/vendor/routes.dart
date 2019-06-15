@@ -1,9 +1,9 @@
+import 'package:community/vendor/routeHandlers.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:community/config/routeHandlers.dart';
 
 class Routes {
-  static String splash = "/";
+  static String root = "/";
   static String home = "/home";
   static String welcome = "/welcome";
   static String dashboard = "/dash";
@@ -11,12 +11,12 @@ class Routes {
   static String register = "/register";
   static String map = "/map";
 
-  static void configureRoutes(Router router) {
+  void defineRoutes(Router router) {
     router.notFoundHandler = new Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       print("ROUTE WAS NOT FOUND !!!");
     });
-    router.define(splash, handler: splashHandler);
+    router.define(root, handler: rootHandler);
     router.define(home, handler: homeHandler);
   }
 }
