@@ -1,9 +1,11 @@
+import 'package:community/bloc/blocs/mainScreenBloc.dart';
 import 'package:community/redux/app_state.dart';
 import 'package:community/vendor//routes.dart';
 import 'package:community/vendor//themes.dart';
 import 'package:community/vendor/globals.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
@@ -39,11 +41,14 @@ class _AppComponentState extends State<AppComponent> {
         themedWidgetBuilder: (BuildContext context, themeData) {
           return StoreProvider<AppState>(
             store: widget.store,
-            child: new MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: widget.store.state.appName,
-              theme: themeData,
-              onGenerateRoute: router.generator,
+            child: BlocProvider(
+              builder: (context) => MainScreenBloc(),
+              child: new MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: widget.store.state.appName,
+                theme: themeData,
+                onGenerateRoute: router.generator,
+              ),
             ),
           );
         });
