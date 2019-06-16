@@ -1,4 +1,4 @@
-import 'package:community/view/components/home/refresherList.dart';
+import 'package:community/view/components/home/refresher_list.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
