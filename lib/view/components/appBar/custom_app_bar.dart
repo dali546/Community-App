@@ -1,5 +1,5 @@
-import 'package:community/bloc/blocs/mainScreenBloc.dart';
-import 'package:community/bloc/states/mainScreenState.dart';
+import 'package:community/bloc/blocs/main_screen_bloc.dart';
+import 'package:community/bloc/states/main_screen_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

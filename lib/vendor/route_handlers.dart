@@ -1,6 +1,6 @@
-import 'package:community/bloc/blocs/mainScreenBloc.dart';
-import 'package:community/view/launch/splashScreenComponent.dart';
-import 'package:community/view/main/mainScreen.dart';
+import 'package:community/bloc/blocs/main_screen_bloc.dart';
+import 'package:community/view/launch/splash_screen_view.dart';
+import 'package:community/view/main/main_screen.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
