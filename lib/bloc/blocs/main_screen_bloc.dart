@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:community/bloc/events/mainScreenEvent.dart';
-import 'package:community/bloc/states/mainScreenState.dart';
+import 'package:community/bloc/events/main_screen_event.dart';
+import 'package:community/bloc/states/main_screen_state.dart';
 
 class MainScreenBloc extends Bloc<MainScreenEvent, MainScreenState> {
   @override

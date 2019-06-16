@@ -1,11 +1,11 @@
-import 'package:community/bloc/blocs/mainScreenBloc.dart';
-import 'package:community/bloc/events/mainScreenEvent.dart';
-import 'package:community/bloc/states/mainScreenState.dart';
-import 'package:community/view/components/appScaffold/appScaffold.dart';
-import 'package:community/view/main/accountComponentView.dart';
-import 'package:community/view/main/homeComponentView.dart';
-import 'package:community/view/main/mapComponentView.dart';
-import 'package:community/view/main/searchComponentView.dart';
+import 'package:community/bloc/blocs/main_screen_bloc.dart';
+import 'package:community/bloc/events/main_screen_event.dart';
+import 'package:community/bloc/states/main_screen_state.dart';
+import 'package:community/view/components/appScaffold/custom_app_scaffold.dart';
+import 'package:community/view/main/account_screen_view.dart';
+import 'package:community/view/main/home_screen_view.dart';
+import 'package:community/view/main/map_screen_view.dart';
+import 'package:community/view/main/search_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

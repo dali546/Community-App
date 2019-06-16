@@ -1,5 +1,5 @@
-import 'package:community/bloc/blocs/mainScreenBloc.dart';
-import 'package:community/bloc/events/mainScreenEvent.dart';
+import 'package:community/bloc/blocs/main_screen_bloc.dart';
+import 'package:community/bloc/events/main_screen_event.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
