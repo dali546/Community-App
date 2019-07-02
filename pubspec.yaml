@@ -26,13 +26,19 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   ## Theme Management
-  dynamic_theme: ^1.0.0
+  dynamic_theme: ^1.0.1
   ## Route/Navigation Management
-  fluro: ^1.4.0
+  fluro: ^1.5.0
   ## Generate Launcher Icons
-  flutter_launcher_icons: ^0.6.1
+  flutter_launcher_icons: ^0.7.2
   ## Splash Screen Dependencu
   splashscreen: ^1.2.0
+  ## Dio - HTTP
+  dio: ^2.1.7
+  ## GraphQL Support
+  graphql_flutter: ^1.1.1-beta.7
+  ## Equatable - Handles equality of objects
+  equatable: ^0.2.6
 
 
   # State Management
@@ -43,8 +49,15 @@ dependencies:
   ## Redux - Global State
   flutter_redux: ^0.5.3
   redux_logging: ^0.3.0
-  redux_persist_flutter: ^0.8.1
+  #redux_persist_flutter: ^0.8.1
   ## BLoC - Local State
+  flutter_bloc: ^0.17.0
+
+  # Custom Nav Bar
+  curved_navigation_bar: ^0.2.20
+
+  # Refresher
+  pull_to_refresh: ^1.4.5
 
 
 
@@ -67,8 +80,8 @@ flutter:
   uses-material-design: true
 
   assets:
-  - assets/images/logo.png
-  - assets/images/screen.png
+    - assets/images/logo.png
+    - assets/images/screen.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -102,8 +115,6 @@ flutter:
   # see https://flutter.io/custom-fonts/#from-packages
 
 ## Temporary Fix for Flutter Icons crashing on generating images
-dependency_overrides:
-  image: 2.0.7
 
 flutter_icons:
   android: "launcher_icon"

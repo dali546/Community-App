@@ -1,5 +1,7 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
+import 'package:redux_persist/redux_persist.dart';
+import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 import 'redux.dart';
 
 // Redux Initialisation called by main();
@@ -13,7 +15,6 @@ Future<Store<AppState>> setupRedux() async {
 
   // Load initial state - Load existing state -- calls Appstate.fromJson method
   final initialState = AppState.initial();
-
   // Create Store - Holds global configuration of the app.
   final store = Store<AppState>(
     appReducer,
