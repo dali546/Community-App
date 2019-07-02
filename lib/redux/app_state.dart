@@ -5,21 +5,20 @@ import 'package:meta/meta.dart';
 
 class AppState {
   final String appName;
-  String currentRouteTitle;
+  final String serverURL;
 
-  AppState({@required this.appName, this.currentRouteTitle});
+  AppState({
+    this.appName = "Community",
+    this.serverURL = "http://192.168.0.5:8000",
+  });
 
   factory AppState.initial() {
-    return AppState(
-      appName: "Community",
-      currentRouteTitle: "No Route Specified" // Todo move over to BLoC pattern
-    );
+    return AppState();
   }
 
   AppState copyWith({String appName, String currentRouteTitle}) {
     return AppState(
       appName: appName ?? this.appName,
-      currentRouteTitle: currentRouteTitle ?? this.currentRouteTitle,
     );
   }
 
@@ -32,5 +31,5 @@ class AppState {
     }
   }
 
-  dynamic toJson() => {'appName': appName};
+  dynamic toJson() => {'appName': appName, 'serverUrl': serverURL};
 }
