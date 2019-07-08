@@ -1,8 +1,5 @@
 // The Redux Store
 
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-
 class AppState {
   final String appName;
   final String serverURL;

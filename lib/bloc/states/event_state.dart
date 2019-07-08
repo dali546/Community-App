@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
 
 abstract class EventState extends Equatable {}

@@ -1,7 +1,5 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
-import 'package:redux_persist/redux_persist.dart';
-import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 import 'redux.dart';
 
 // Redux Initialisation called by main();
