@@ -1,4 +1,3 @@
-
 import 'package:community/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +9,7 @@ class CustomSmartRefresher extends StatefulWidget {
 }
 
 class _CustomSmartRefresherState extends State<CustomSmartRefresher> {
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  final RefreshController refreshController = RefreshController(initialRefresh: true);
   EventBloc eventBloc;
 
   @override
@@ -30,7 +28,7 @@ class _CustomSmartRefresherState extends State<CustomSmartRefresher> {
             return CircularProgressIndicator();
           } else if (state is EventLoadedState) {
             return Container(
-              height: MediaQuery.of(context).size.height-100,
+              height: MediaQuery.of(context).size.height - 100,
               child: ListView.builder(itemBuilder: (context, position) {
                 return _buildItem(state.events[position]);
               }).build(context),

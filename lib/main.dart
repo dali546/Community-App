@@ -4,5 +4,5 @@ import 'package:flutter/material.dart';
 
 void main() async {
   await initialiseGlobals();
-  runApp(AppComponent(store: store));
+  runApp(AppComponent());
 }

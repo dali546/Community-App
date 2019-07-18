@@ -1,19 +1,80 @@
+import 'package:community/bloc/blocs/splash_bloc.dart';
+import 'package:community/bloc/events/splash_event.dart';
+import 'package:community/bloc/states/splash_state.dart';
+import 'package:community/vendor/globals.dart';
+import 'package:community/vendor/routes.dart';
+import 'package:community/view/components/animated_background.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:splashscreen/splashscreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SplashComponent extends StatelessWidget {
+class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 5,
-        navigateAfterSeconds: "/home",
-        title: new Text(
-          'Welcome To Community SplashScreen',
-        ),
-        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        loaderColor: Colors.red);
+    final _splashBloc = BlocProvider.of<SplashBloc>(context);
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          AnimatedBackground(),
+          Column(children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Image.asset(
+                "assets/images/logo.png",
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text("Community", style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: CircularProgressIndicator(),
+            ),
+            BlocListener<SplashEvent, SplashState>(
+              bloc: _splashBloc,
+              listener: (context, state) {
+                if (state is InitialSplashState) {
+                  // Add delay just because it's too fast.
+                  Future.delayed(Duration(seconds: 10))
+                      .then((_) => _splashBloc.dispatch(CheckIfTokenPresentEvent()));
+                } else
+                if (state is UnknownUserCredentialsState || state is FailedAuthenticationState) {
+                  router.navigateTo(context, Routes.auth,
+                      replace: true, transition: TransitionType.nativeModal);
+                } else if (state is SuccessfulAuthenticationState) {
+                  router.navigateTo(
+                      context, Routes.home, replace: true, transition: TransitionType.inFromBottom);
+                }
+              },
+              child: BlocBuilder<SplashEvent, SplashState>(
+                  bloc: _splashBloc,
+                  builder: (BuildContext context, SplashState state) {
+                    print(state);
+                    if (state is InitialSplashState) {
+                      return Text("App is Initialising...");
+                    } else if (state is GettingUserCredentialsState) {
+                      return Text("Loading settings");
+                    } else if (state is UnknownUserCredentialsState) {
+                      return Text("Taking you to log in...");
+                    } else if (state is AuthenticatingUserState) {
+                      return Text("Authenticating...");
+                    } else if (state is FailedAuthenticationState) {
+                      return Text("Failed to Authenticate. Please log in again...");
+                    } else if (state is SuccessfulAuthenticationState) {
+                      return Text("Successfully logged in. Welcome");
+                    } else
+                      return Text("Unknown error.");
+                  }),
+            ),
+          ]),
+        ],
+      ),
+    );
   }
 }

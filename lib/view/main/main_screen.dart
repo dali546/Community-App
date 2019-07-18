@@ -1,3 +1,4 @@
+import 'package:community/bloc/bloc.dart';
 import 'package:community/view/components/appScaffold/custom_app_scaffold.dart';
 import 'package:community/view/main/account_screen_view.dart';
 import 'package:community/view/main/home_screen_view.dart';
@@ -5,7 +6,6 @@ import 'package:community/view/main/map_screen_view.dart';
 import 'package:community/view/main/search_screen_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:community/bloc/bloc.dart';
 
 class MainScreen extends StatelessWidget {
   @override
