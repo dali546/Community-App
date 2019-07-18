@@ -1,7 +1,7 @@
-import 'package:community/graphql/queries.dart';
-import 'package:community/vendor/globals.dart';
 import 'package:bloc/bloc.dart';
 import 'package:community/bloc/bloc.dart';
+import 'package:community/graphql/queries.dart';
+import 'package:community/vendor/globals.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class EventBloc extends Bloc<EventEvent, EventState> {
@@ -15,7 +15,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
 
       try {
         QueryResult result =
-            await client.value.query(QueryOptions(document: Queries.getPosts));
+            await graphQLClient.value.query(QueryOptions(document: Queries.getPosts));
         final List events = result.data['events']['data'];
         print(events);
         yield EventLoadedState(events: events);
@@ -29,8 +29,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
 
 loadEvents() async {
   try {
-    QueryResult result =
-        await client.value.query(QueryOptions(document: Queries.getPosts));
+    QueryResult result = await graphQLClient.value.query(QueryOptions(document: Queries.getPosts));
     final List events = result.data['events']['data'];
     print(events);
     return events;
