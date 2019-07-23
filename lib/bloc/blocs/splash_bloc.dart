@@ -25,7 +25,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Stream<SplashState> checkReduxStore() async* {
-    if (store.state.authUser != null && store.state.authUser.accessToken!=null) {
+    if (store.state.authUser != null && store.state.authUser.accessToken != null) {
       dispatch(CheckIfTokenValidEvent());
     } else {
       yield UnknownUserCredentialsState();
@@ -33,17 +33,17 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   Stream<SplashState> validateAuthUser() async* {
-    bool isValid = await graphQLClient.value
+    yield await graphQLClient.value
         .query(QueryOptions(
       document: Queries.validateToken,
     ))
         .then((QueryResult response) {
-      return response.hasErrors ? false : true;
+      // TODO - Specific states for Specific errors... awaiting graphql-flutter PR #355
+      if (response.hasErrors) {
+        return FailedAuthenticationState();
+      } else {
+        return SuccessfulAuthenticationState();
+      }
     });
-    if (isValid) {
-      yield SuccessfulAuthenticationState();
-    } else {
-      yield FailedAuthenticationState();
-    }
   }
 }

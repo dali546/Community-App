@@ -1,7 +1,6 @@
 import 'package:community/redux/app_state.dart';
-import 'package:community/vendor//routes.dart';
-import 'package:community/vendor//themes.dart';
 import 'package:community/vendor/globals.dart';
+import 'package:community/vendor/themes.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';

@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _mainScreenBloc = BlocProvider.of<MainScreenBloc>(context);
     return new AppScaffold(
-      body: new BlocBuilder<MainScreenEvent, MainScreenState>(
+      body: BlocBuilder(
         bloc: _mainScreenBloc,
         builder: (context, state) {
           if (state is HomeScreenState) {
@@ -22,7 +22,8 @@ class MainScreen extends StatelessWidget {
           } else if (state is MapScreenState) {
             return MapComponentView();
           } else if (state is AccountScreenState) {
-            return AccountComponentView();
+            return BlocProvider<AuthBloc>(
+                builder: (context) => AuthBloc(), child: AccountComponentView());
           } else {
             return Text("Failed to initialise App.");
           }

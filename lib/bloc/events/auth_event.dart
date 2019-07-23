@@ -11,6 +11,10 @@ class AttemptLoginEvent extends AuthEvent {
   AttemptLoginEvent({this.value});
 }
 
-class AttemptRegisterEvent extends AuthEvent {}
+class AttemptRegisterEvent extends AuthEvent {
+  Map<String, dynamic> value;
+
+  AttemptRegisterEvent({this.value});
+}
 
 class AttemptLogoutEvent extends AuthEvent {}

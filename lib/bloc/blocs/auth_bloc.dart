@@ -12,6 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    print(event);
     if (event is AttemptLoginEvent) {
       yield* login(event.value);
     }
@@ -34,10 +35,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     ));
     if (result.hasErrors) {
-      print("fails");
+      print(result.errors);
       yield FailedAuthenticationState();
     } else {
-      print("success");
       print(result.data);
       store.dispatch(SaveUserDetailsAction(json: result.data["login"]));
       yield SuccessfulAuthenticationState(data: result.data);

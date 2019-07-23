@@ -19,40 +19,31 @@ class SplashView extends StatelessWidget {
           AnimatedBackground(),
           Column(children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Image.asset(
-                "assets/images/logo.png",
-                fit: BoxFit.fitWidth,
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                child: Image.asset("assets/images/logo.png", fit: BoxFit.fitWidth)),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text("Community", style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline),
-            ),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Text(store.state.appName, style: Theme.of(context).textTheme.headline)),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: CircularProgressIndicator(),
-            ),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: CircularProgressIndicator()),
             BlocListener<SplashEvent, SplashState>(
               bloc: _splashBloc,
               listener: (context, state) {
                 if (state is InitialSplashState) {
                   // Add delay just because it's too fast.
-                  Future.delayed(Duration(seconds: 10))
+                  Future.delayed(Duration(seconds: 5))
                       .then((_) => _splashBloc.dispatch(CheckIfTokenPresentEvent()));
-                } else
-                if (state is UnknownUserCredentialsState || state is FailedAuthenticationState) {
+                } else if (state is UnknownUserCredentialsState ||
+                    state is FailedAuthenticationState) {
                   router.navigateTo(context, Routes.auth,
                       replace: true, transition: TransitionType.nativeModal);
                 } else if (state is SuccessfulAuthenticationState) {
-                  router.navigateTo(
-                      context, Routes.home, replace: true, transition: TransitionType.inFromBottom);
+                  router.navigateTo(context, Routes.home,
+                      replace: true, transition: TransitionType.inFromBottom);
                 }
               },
-              child: BlocBuilder<SplashEvent, SplashState>(
+              child: BlocBuilder(
                   bloc: _splashBloc,
                   builder: (BuildContext context, SplashState state) {
                     print(state);
