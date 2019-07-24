@@ -72,12 +72,26 @@ class AuthScreen extends StatelessWidget {
               listener: (context, state) {
                 print(state);
                 if (state is FailedAuthenticationState) {
-                  showDialog(context: context, builder: (context) => Text("Failed"));
-                } else if (state is SuccessfulAuthenticationState){
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("Failed!"),
+                      content: Text("Failed to authenticate"),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text("Ok"),
+                          onPressed: () {
+                            router.pop(context);
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                } else if (state is SuccessfulAuthenticationState) {
                   router.navigateTo(context, Routes.home);
                 }
               },
-              child: BlocBuilder<AuthBloc, AuthState>(                  
+              child: BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, state) {
                     print(state);
                     if (state is UnauthenticatedUserState) {

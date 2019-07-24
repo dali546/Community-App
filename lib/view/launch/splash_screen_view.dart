@@ -20,21 +20,20 @@ class SplashView extends StatelessWidget {
           Column(children: <Widget>[
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Image.asset("assets/images/logo.png",
-                    fit: BoxFit.fitWidth)),
+                child: Image.asset("assets/images/logo.png", fit: BoxFit.fitWidth)),
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Text(store.state.appName,
-                    style: Theme.of(context).textTheme.headline)),
+                child: Text(store.state.appName, style: Theme.of(context).textTheme.headline)),
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: CircularProgressIndicator()),
             BlocListener<SplashBloc, SplashState>(
-              listener: (context, state) {
+              listener: (BuildContext context, SplashState state) {
+                print(state);
                 if (state is InitialSplashState) {
                   // Add delay just because it's too fast.
-                  Future.delayed(Duration(seconds: 5)).then(
-                      (_) => _splashBloc.dispatch(CheckIfTokenPresentEvent()));
+                  Future.delayed(Duration(seconds: 5))
+                      .then((_) => _splashBloc.dispatch(CheckIfTokenPresentEvent()));
                 } else if (state is UnknownUserCredentialsState ||
                     state is FailedAuthenticationState) {
                   router.navigateTo(context, Routes.auth,
@@ -44,8 +43,7 @@ class SplashView extends StatelessWidget {
                       replace: true, transition: TransitionType.inFromBottom);
                 }
               },
-              child: BlocBuilder(
-                  bloc: _splashBloc,
+              child: BlocBuilder<SplashBloc,SplashState>(
                   builder: (BuildContext context, SplashState state) {
                     print(state);
                     if (state is InitialSplashState) {
@@ -57,8 +55,7 @@ class SplashView extends StatelessWidget {
                     } else if (state is AuthenticatingUserState) {
                       return Text("Authenticating...");
                     } else if (state is FailedAuthenticationState) {
-                      return Text(
-                          "Failed to Authenticate. Please log in again...");
+                      return Text("Failed to Authenticate. Please log in again...");
                     } else if (state is SuccessfulAuthenticationState) {
                       return Text("Successfully logged in. Welcome");
                     } else
