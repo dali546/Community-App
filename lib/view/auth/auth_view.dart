@@ -1,6 +1,5 @@
 import 'package:community/bloc/bloc.dart';
 import 'package:community/bloc/blocs/auth_bloc.dart';
-import 'package:community/bloc/events/auth_event.dart';
 import 'package:community/vendor/globals.dart';
 import 'package:community/vendor/routes.dart';
 import 'package:community/view/auth/auth_login_form.dart';
@@ -14,8 +13,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authScreenBloc = BlocProvider.of<AuthScreenBloc>(context);
-    final authBloc = BlocProvider.of<AuthBloc>(context);
+    final authScreenBloc = BlocProvider.of<AuthScreenBloc>(context);    
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(children: <Widget>[
@@ -35,10 +33,10 @@ class AuthScreen extends StatelessWidget {
                         flipOnTouch: false,
                         front: Card(
                             elevation: 10,
-                            child: SingleChildScrollView(child: new AuthLoginForm())),
+                            child: SingleChildScrollView(child: AuthLoginForm())),
                         back: Card(
                             elevation: 10,
-                            child: SingleChildScrollView(child: new AuthRegisterForm()))))),
+                            child: SingleChildScrollView(child: AuthRegisterForm()))))),
             Expanded(
                 flex: 1,
                 child: Padding(
@@ -70,7 +68,7 @@ class AuthScreen extends StatelessWidget {
                           }
                         })))
           ]),
-          BlocListener<AuthEvent, AuthState>(
+          BlocListener<AuthBloc, AuthState>(
               listener: (context, state) {
                 print(state);
                 if (state is FailedAuthenticationState) {
@@ -79,9 +77,7 @@ class AuthScreen extends StatelessWidget {
                   router.navigateTo(context, Routes.home);
                 }
               },
-              bloc: authBloc,
-              child: BlocBuilder(
-                  bloc: authBloc,
+              child: BlocBuilder<AuthBloc, AuthState>(                  
                   builder: (context, state) {
                     print(state);
                     if (state is UnauthenticatedUserState) {

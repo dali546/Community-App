@@ -52,7 +52,7 @@ dependencies:
   redux_persist_flutter:
     path: /mnt/data/DATA/Personal Projects/redux_persist/packages/redux_persist_flutter
   ## BLoC - Local State
-  flutter_bloc: ^0.17.0
+  flutter_bloc: ^0.20.0
 
   # Custom Nav Bar
   curved_navigation_bar: ^0.2.20
