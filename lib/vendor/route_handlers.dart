@@ -13,7 +13,7 @@ var rootHandler =
 
 var authHandler =
     new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return BlocProviderTree(blocProviders: [
+  return MultiBlocProvider(providers: [
     BlocProvider<AuthBloc>(builder: (BuildContext context) => AuthBloc()),
     BlocProvider<AuthScreenBloc>(builder: (BuildContext context) => AuthScreenBloc())
   ], child: AuthScreen());
@@ -21,7 +21,7 @@ var authHandler =
 
 var homeHandler =
     new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return BlocProviderTree(blocProviders: [
+  return MultiBlocProvider(providers: [
     BlocProvider<MainScreenBloc>(builder: (context) => MainScreenBloc()),
     BlocProvider<AuthBloc>(builder: (context) => AuthBloc())
   ], child: MainScreen());
