@@ -1,5 +1,4 @@
 import 'package:community/bloc/blocs/splash_bloc.dart';
-import 'package:community/bloc/events/splash_event.dart';
 import 'package:community/bloc/states/splash_state.dart';
 import 'package:community/vendor/globals.dart';
 import 'package:community/vendor/routes.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _splashBloc = BlocProvider.of<SplashBloc>(context);
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -30,11 +28,7 @@ class SplashView extends StatelessWidget {
             BlocListener<SplashBloc, SplashState>(
               listener: (BuildContext context, SplashState state) {
                 print(state);
-                if (state is InitialSplashState) {
-                  // Add delay just because it's too fast.
-                  Future.delayed(Duration(seconds: 5))
-                      .then((_) => _splashBloc.dispatch(CheckIfTokenPresentEvent()));
-                } else if (state is UnknownUserCredentialsState ||
+                if (state is UnknownUserCredentialsState ||
                     state is FailedAuthenticationState) {
                   router.navigateTo(context, Routes.auth,
                       replace: true, transition: TransitionType.nativeModal);
