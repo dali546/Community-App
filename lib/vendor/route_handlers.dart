@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 var rootHandler =
     new Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return BlocProvider<SplashBloc>(builder: (context) => SplashBloc(), child: SplashView());
+  return BlocProvider<SplashBloc>(builder: (context) => SplashBloc()..dispatch(CheckIfTokenPresentEvent()), child: SplashView());
 });
 
 var authHandler =
