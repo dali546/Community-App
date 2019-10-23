@@ -12,12 +12,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    print(event);
     if (event is AttemptLoginEvent) {
       yield* login(event.value);
     }
     if (event is AttemptRegisterEvent) {
-      yield* register(event.user);
+      yield* register(event.value);
     }
     if (event is AttemptLogoutEvent) {
       yield* logout(event.user);
@@ -40,12 +39,44 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else {
       print(result.data);
       store.dispatch(SaveUserDetailsAction(json: result.data["login"]));
-      yield SuccessfulAuthenticationState(data: result.data);
+      yield SuccessfulAuthenticationState();
     }
   }
 
-  Stream<AuthState> register(user) async* {}
+  Stream<AuthState> register(Map<String, dynamic> value) async* {
+    yield AuthenticatingUserState();
+    QueryResult result = await graphQLClient.value.mutate(MutationOptions(
+      document: Queries.register,
+      variables: {
+        "input": {
+          "username": value['username'],
+          "email": value['email'],
+          "password": value['password'],
+          "password_confirmation": value['password_confirmation'],
+        }
+      },
+    ));
+    if (result.hasErrors) {
+      print(result.errors);
+      yield FailedAuthenticationState();
+    } else {
+      print(result.data);
+      store.dispatch(SaveUserDetailsAction(json: result.data['register']));
+      yield SuccessfulAuthenticationState();
+    }
+  }
 
-  Stream<AuthState> logout(user) async* {}
-  
+  Stream<AuthState> logout(user) async* {
+    yield AuthenticatingUserState();
+    QueryResult result =
+        await graphQLClient.value.mutate(MutationOptions(document: Queries.logout));
+    if (result.hasErrors) {
+      print(result.errors);
+      yield FailedLogoutState();
+    } else {
+      print(result.data);
+      store.dispatch(LogoutAction());
+      yield SuccessfulLogoutState();
+    }
+  }
 }

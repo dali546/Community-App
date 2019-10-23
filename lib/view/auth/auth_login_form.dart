@@ -14,7 +14,6 @@ class AuthLoginForm extends StatelessWidget {
       children: <Widget>[
         FormBuilder(
           key: _loginFormKey,
-          autovalidate: true,
           child: Column(
             children: <Widget>[
               FormBuilderTextField(

@@ -8,12 +8,18 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AuthScreen extends StatelessWidget {
-  static final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+class AuthScreen extends StatefulWidget {
+  final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isFront = true;
 
   @override
   Widget build(BuildContext context) {
-    final authScreenBloc = BlocProvider.of<AuthScreenBloc>(context);    
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(children: <Widget>[
@@ -28,12 +34,15 @@ class AuthScreen extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: FlipCard(
-                        onFlip: () => authScreenBloc.dispatch(FlipCardEvent()),
-                        key: cardKey,
+                        onFlip: () {
+                          setState(() {
+                            isFront = widget.cardKey.currentState.isFront;
+                          });
+                        },
+                        key: widget.cardKey,
                         flipOnTouch: false,
                         front: Card(
-                            elevation: 10,
-                            child: SingleChildScrollView(child: AuthLoginForm())),
+                            elevation: 10, child: SingleChildScrollView(child: AuthLoginForm())),
                         back: Card(
                             elevation: 10,
                             child: SingleChildScrollView(child: AuthRegisterForm()))))),
@@ -41,36 +50,21 @@ class AuthScreen extends StatelessWidget {
                 flex: 1,
                 child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: BlocBuilder(
-                        bloc: authScreenBloc,
-                        builder: (BuildContext context, AuthScreenState state) {
-                          print(state);
-                          if (state is LoginAuthScreenState) {
-                            return RichText(
-                                text: TextSpan(children: [
-                              WidgetSpan(child: Text("Don't have an account. ")),
-                              WidgetSpan(
-                                  child: InkWell(
-                                      child: Text("Register",
-                                          style: TextStyle(decoration: TextDecoration.underline)),
-                                      onTap: () => cardKey.currentState.toggleCard()))
-                            ]));
-                          } else {
-                            return RichText(
-                                text: TextSpan(children: [
-                              WidgetSpan(child: Text("Already Have an account? ")),
-                              WidgetSpan(
-                                  child: InkWell(
-                                      child: Text("Login",
-                                          style: TextStyle(decoration: TextDecoration.underline)),
-                                      onTap: () => cardKey.currentState.toggleCard()))
-                            ]));
-                          }
-                        })))
+                    child: RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                          text: isFront ? "Don't have an account. " : "Already have an account. ",
+                          style: TextStyle(color: Colors.black)),
+                      WidgetSpan(
+                          child: InkWell(
+                              child: Text(isFront ? "Register" : "Login",
+                                  style: TextStyle(decoration: TextDecoration.underline)),
+                              onTap: () => widget.cardKey.currentState.toggleCard()))
+                    ]))))
           ]),
           BlocListener<AuthBloc, AuthState>(
+              bloc: BlocProvider.of<AuthBloc>(context),
               listener: (context, state) {
-                print(state);
                 if (state is FailedAuthenticationState) {
                   showDialog(
                     context: context,
@@ -88,12 +82,12 @@ class AuthScreen extends StatelessWidget {
                     ),
                   );
                 } else if (state is SuccessfulAuthenticationState) {
-                  router.navigateTo(context, Routes.home);
+                  router.navigateTo(context, Routes.home, replace: true);
                 }
               },
               child: BlocBuilder<AuthBloc, AuthState>(
+                  bloc: BlocProvider.of<AuthBloc>(context),
                   builder: (context, state) {
-                    print(state);
                     if (state is UnauthenticatedUserState) {
                       return Container();
                     } else if (state is AuthenticatingUserState) {

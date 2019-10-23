@@ -14,7 +14,6 @@ class AuthRegisterForm extends StatelessWidget {
       children: <Widget>[
         FormBuilder(
           key: _registerFormKey,
-          autovalidate: true,
           child: Column(
             children: <Widget>[
               FormBuilderTextField(
@@ -36,6 +35,22 @@ class AuthRegisterForm extends StatelessWidget {
                 validators: [
                   FormBuilderValidators.required(),
                   FormBuilderValidators.minLength(4),
+                ],
+                obscureText: true,
+              ),
+              FormBuilderTextField(
+                attribute: "password_confirmation",
+                decoration: InputDecoration(labelText: "Confirm Password"),
+                validators: [
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.minLength(4),
+                  (val) {
+                    if (_registerFormKey.currentState.fields['password'].currentState.value != val) {
+                      return "Passwords Do Not Match";
+                    } else {
+                      return null;
+                    }
+                  }
                 ],
                 obscureText: true,
               ),

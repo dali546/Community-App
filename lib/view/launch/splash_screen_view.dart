@@ -28,33 +28,33 @@ class SplashView extends StatelessWidget {
             BlocListener<SplashBloc, SplashState>(
               listener: (BuildContext context, SplashState state) {
                 print(state);
-                if (state is UnknownUserCredentialsState ||
-                    state is FailedAuthenticationState) {
-                  router.navigateTo(context, Routes.auth,
-                      replace: true, transition: TransitionType.nativeModal);
+                if (state is UnknownUserCredentialsState || state is FailedAuthenticationState) {
+                  Future.delayed(Duration(seconds: 5)).then((_) => router.navigateTo(
+                      context, Routes.auth,
+                      replace: true, transition: TransitionType.nativeModal));
                 } else if (state is SuccessfulAuthenticationState) {
                   router.navigateTo(context, Routes.home,
                       replace: true, transition: TransitionType.inFromBottom);
                 }
               },
-              child: BlocBuilder<SplashBloc,SplashState>(
+              child: BlocBuilder<SplashBloc, SplashState>(
                   builder: (BuildContext context, SplashState state) {
-                    print(state);
-                    if (state is InitialSplashState) {
-                      return Text("App is Initialising...");
-                    } else if (state is GettingUserCredentialsState) {
-                      return Text("Loading settings");
-                    } else if (state is UnknownUserCredentialsState) {
-                      return Text("Taking you to log in...");
-                    } else if (state is AuthenticatingUserState) {
-                      return Text("Authenticating...");
-                    } else if (state is FailedAuthenticationState) {
-                      return Text("Failed to Authenticate. Please log in again...");
-                    } else if (state is SuccessfulAuthenticationState) {
-                      return Text("Successfully logged in. Welcome");
-                    } else
-                      return Text("Unknown error.");
-                  }),
+                print(state);
+                if (state is InitialSplashState) {
+                  return Text("App is Initialising...");
+                } else if (state is GettingUserCredentialsState) {
+                  return Text("Loading settings");
+                } else if (state is UnknownUserCredentialsState) {
+                  return Text("Taking you to log in...");
+                } else if (state is AuthenticatingUserState) {
+                  return Text("Authenticating...");
+                } else if (state is FailedAuthenticationState) {
+                  return Text("Failed to Authenticate. Please log in again...");
+                } else if (state is SuccessfulAuthenticationState) {
+                  return Text("Successfully logged in. Welcome");
+                } else
+                  return Text("Unknown error.");
+              }),
             ),
           ]),
         ],

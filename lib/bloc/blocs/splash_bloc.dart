@@ -13,7 +13,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   @override
   Stream<SplashState> mapEventToState(SplashEvent event) async* {
-    print(event);
     if (event is CheckIfTokenPresentEvent) {
       yield GettingUserCredentialsState();
       yield* checkReduxStore();

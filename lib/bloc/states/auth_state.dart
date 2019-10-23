@@ -15,3 +15,7 @@ class SuccessfulAuthenticationState extends AuthState {
 }
 
 class LoggedInState extends AuthState {}
+
+class FailedLogoutState extends AuthState{}
+
+class SuccessfulLogoutState extends AuthState{}

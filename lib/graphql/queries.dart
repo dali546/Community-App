@@ -50,4 +50,38 @@ class Queries {
       }
     }
   """;
+
+  static const register = r"""
+    mutation Register($input: RegisterInput!){
+      register(
+        data: $input 
+      )
+      {
+        access_token
+        refresh_token
+        expires_in
+        token_type
+        user {
+          username
+          email
+          profile {
+            forename
+            surname
+            birthday
+            gender
+          }
+        }
+      }
+    }
+  """;
+
+  static const logout = r"""
+    mutation Logout(){
+      logout()
+      {
+        status
+        message
+      }
+    }
+  """;
 }

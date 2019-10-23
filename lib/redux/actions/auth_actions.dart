@@ -11,3 +11,10 @@ class SaveUserDetailsAction extends Action {
     return "Saving User details...";
   }
 }
+
+class LogoutAction extends Action {
+  @override
+  String getDescription() {
+    return "Logging Out...";
+  }
+}
